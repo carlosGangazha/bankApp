@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: jdbc:postgresql:telemedicine_project
+    url: jdbc:postgresql:bankapp
     username: postgres
-    password: Miller_dev12
+    password: password
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:

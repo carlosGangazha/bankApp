@@ -22,7 +22,7 @@ public class AuthenticationService {
 
     public AuthenticationResponseDto register(UserCreateRequestDto request) {
         var user = new User(
-                request.getFirstname(),
+                request.getFull_name(),
                 request.getEmail(),
                 passwordEncoder.encode(request.getPassword()),
                 ERole.USER);

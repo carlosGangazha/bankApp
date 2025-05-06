@@ -1,5 +1,6 @@
 package com.zimsec.Security.userAuth;
 
+import com.zimsec.Security.Accounts.accountModel;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -28,13 +29,14 @@ public class User implements UserDetails {
     }
 
     private String firstName;
-
-
     private String email;
     private String password;
 
     @Enumerated(EnumType.STRING)
     private ERole role;
+
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    private accountModel user;
 
     public User(String firstname, String email, String encode, ERole o) {
         this.firstName = firstname;
