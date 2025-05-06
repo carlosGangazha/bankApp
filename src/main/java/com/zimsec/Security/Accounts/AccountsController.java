@@ -4,6 +4,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping("/transactions")
 public class AccountsController {
     private final AccountsService accountsService;
 
@@ -12,11 +13,9 @@ public class AccountsController {
     }
 
     @GetMapping("/balance")
-    public ResponseEntity<Double> getAccountBalance(
-            @PathVariable int id,
-            @PathVariable String email
+    public ResponseEntity<Double> getAccountBalance(@ModelAttribute BalanceRequestDto balanceRequestDto
     ){
-        return ResponseEntity.ok(accountsService.getBalance(id,email));
+        return ResponseEntity.ok(accountsService.getBalance(balanceRequestDto.id(),balanceRequestDto.email()));
     }
 
     @PostMapping("/top-up")
