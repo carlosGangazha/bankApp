@@ -1,6 +1,6 @@
 package com.zimsec.Security.userAuth;
 
-import com.zimsec.Security.Accounts.accountModel;
+import com.zimsec.Security.Accounts.AccountModel;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -23,11 +23,6 @@ public class User implements UserDetails {
     @Id
     @GeneratedValue
     private int id;
-
-    public int getId() {
-        return id;
-    }
-
     private String firstName;
     private String email;
     private String password;
@@ -35,14 +30,19 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private ERole role;
 
+
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
-    private accountModel user;
+    private AccountModel account;
 
     public User(String firstname, String email, String encode, ERole o) {
         this.firstName = firstname;
         this.email = email;
         this.password = encode;
         this.role = o;
+    }
+
+    public int getId() {
+        return id;
     }
 
     @Override
@@ -85,5 +85,14 @@ public class User implements UserDetails {
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
+
+    public AccountModel getAccount() {
+        return account;
+    }
+
+    public void setAccount(AccountModel account) {
+        this.account = account;
+    }
+
 
 }
