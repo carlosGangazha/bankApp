@@ -25,6 +25,7 @@ public class AccountsService {
         double new_amount = userAccount.getBalance() + amount;
         userAccount.setBalance(new_amount);
         accountsRepository.save(userAccount);
+        accountsRepository.flush();
         return new_amount;
     }
 

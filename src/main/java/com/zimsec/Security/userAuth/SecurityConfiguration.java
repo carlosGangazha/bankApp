@@ -29,7 +29,9 @@ public class SecurityConfiguration {
                 .disable()
                 .authorizeHttpRequests()
                 // Permit access to authenticate and register endpoints first
-                .requestMatchers("/api/v1/auth/authenticate", "/api/v1/auth/register")
+                .requestMatchers("/api/v1/auth/authenticate", "/api/v1/auth/register"
+                ,"/v3/api-docs/**", "/swagger-ui/**",
+                        "/swagger-ui.html")
                 .permitAll()
                 // Ensure the rest of the paths in the /api/v1/auth/** require authentication
                 .requestMatchers("/api/v1/auth/**")

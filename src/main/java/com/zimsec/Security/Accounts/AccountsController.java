@@ -12,8 +12,8 @@ public class AccountsController {
         this.accountsService = accountsService;
     }
 
-    @GetMapping("/balance")
-    public ResponseEntity<Double> getAccountBalance(@ModelAttribute BalanceRequestDto balanceRequestDto
+    @PostMapping("/balance")
+    public ResponseEntity<Double> getAccountBalance(@RequestBody BalanceRequestDto balanceRequestDto
     ){
         return ResponseEntity.ok(accountsService.getBalance(balanceRequestDto.id(),balanceRequestDto.email()));
     }
