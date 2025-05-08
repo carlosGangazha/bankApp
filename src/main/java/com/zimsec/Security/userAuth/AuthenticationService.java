@@ -9,18 +9,16 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class AuthenticationService {
-    private final AccountsRepository accountsRepository;
     private final UserRepository repository;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
 
-    public AuthenticationService(UserRepository repository, PasswordEncoder passwordEncoder, JwtService jwtService, AuthenticationManager authenticationManager,AccountsRepository accountsRepository){
+    public AuthenticationService(UserRepository repository, PasswordEncoder passwordEncoder, JwtService jwtService, AuthenticationManager authenticationManager){
         this.repository = repository;
         this.passwordEncoder = passwordEncoder;
         this.jwtService = jwtService;
         this.authenticationManager = authenticationManager;
-        this.accountsRepository = accountsRepository;
     }
 
     public AuthenticationResponseDto register(UserCreateRequestDto request) {

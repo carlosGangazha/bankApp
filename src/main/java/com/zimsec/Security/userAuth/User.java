@@ -30,41 +30,32 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private ERole role;
 
-
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private AccountModel account;
 
-    public User(String firstname, String email, String encode, ERole o) {
+    public User(String firstname, String email, String encode, ERole role) {
         this.firstName = firstname;
         this.email = email;
         this.password = encode;
-        this.role = o;
-    }
-
-    public int getId() {
-        return id;
+        this.role = role;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority(role.name()));
     }
-
     @Override
     public String getUsername() {
         return email;
     }
-
     @Override
     public boolean isAccountNonExpired() {
         return true;
     }
-
     @Override
     public boolean isAccountNonLocked() {
         return true;
     }
-
     @Override
     public boolean isCredentialsNonExpired() {
         return true;
@@ -81,18 +72,13 @@ public class User implements UserDetails {
     public String getFirstName() {
         return firstName;
     }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
     public AccountModel getAccount() {
         return account;
     }
-
     public void setAccount(AccountModel account) {
         this.account = account;
     }
-
-
+    public int getId() {
+        return id;
+    }
 }

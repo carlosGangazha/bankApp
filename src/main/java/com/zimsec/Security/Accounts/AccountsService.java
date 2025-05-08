@@ -1,5 +1,7 @@
 package com.zimsec.Security.Accounts;
 
+import com.zimsec.Security.Banking.TransactionHistoryRepository;
+import com.zimsec.Security.Banking.TransactionModel;
 import com.zimsec.Security.userAuth.User;
 import com.zimsec.Security.userAuth.UserRepository;
 import jakarta.transaction.Transactional;
@@ -11,10 +13,12 @@ import org.springframework.stereotype.Service;
 public class AccountsService {
     private final AccountsRepository accountsRepository;
     private final UserRepository userRepository;
+    private final TransactionHistoryRepository transactionRepository;
 
-    public AccountsService(AccountsRepository accountsRepository, UserRepository userRepository){
+    public AccountsService(AccountsRepository accountsRepository, UserRepository userRepository, TransactionHistoryRepository transactionRepository){
         this.accountsRepository = accountsRepository;
         this.userRepository = userRepository;
+        this.transactionRepository = transactionRepository;
     }
 
     //will add some logic for error checking I don't want to make this complicated
@@ -62,6 +66,14 @@ public class AccountsService {
 
         accountsRepository.save(sender_account);
         accountsRepository.save(receiver_id);
+
+        TransactionModel transaction = new TransactionModel();
+        transaction.setSenderAccount(sender_account);
+        transaction.setReceiverAccount(receiver_id);
+        transaction.setAmount(send_amount);
+        transaction.setDescription("Transfer of $" + send_amount + " To"  + receiver_account);
+
+        transactionRepository.save(transaction);
 
         return ResponseEntity.status(HttpStatus.ACCEPTED).body("Amount transacted, new balance" + sender_balance_after);
     }
