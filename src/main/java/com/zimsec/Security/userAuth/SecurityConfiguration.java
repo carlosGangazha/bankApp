@@ -27,6 +27,7 @@ public class SecurityConfiguration {
         http
                 .csrf()
                 .disable()
+                .cors().and()
                 .authorizeHttpRequests()
                 // Permit access to authenticate and register endpoints first
                 .requestMatchers("/api/v1/auth/authenticate", "/api/v1/auth/register"
