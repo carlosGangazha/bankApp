@@ -13,7 +13,7 @@ public class AccountsController {
     }
 
     @PostMapping("/balance")
-    public ResponseEntity<Double> getAccountBalance(@RequestBody BalanceRequestDto balanceRequestDto
+    public ResponseEntity<BalanceDto> getAccountBalance(@RequestBody BalanceRequestDto balanceRequestDto
     ){
         return ResponseEntity.ok(accountsService.getBalance(balanceRequestDto.id(),balanceRequestDto.email()));
     }

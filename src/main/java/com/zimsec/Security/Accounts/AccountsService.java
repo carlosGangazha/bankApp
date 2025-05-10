@@ -33,13 +33,14 @@ public class AccountsService {
         return new_amount;
     }
 
-    public double getBalance(int user_id, String user_email){
+    public BalanceDto getBalance(int user_id, String user_email){
         User user = userRepository.findById(user_id).orElseThrow(()-> new RuntimeException("No user found"));
         if (!user.getUsername().equalsIgnoreCase(user_email)){
             throw new RuntimeException("Not your account");
         }else {
             AccountModel accountModel = user.getAccount();
-            return accountModel.getBalance();
+            double balance = Math.round(accountModel.getBalance() * 100.0) / 100.0;
+            return new BalanceDto(balance);
         }
     }
     //my logic is big coz I am checking if the user is the user using id and email
