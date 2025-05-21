@@ -1,7 +1,7 @@
 FROM maven:3.9.8-eclipse-temurin-21 AS build
 WORKDIR /app
 COPY . .
-RUN maven clean package -DskipTests
+RUN mvn clean package -DskipTests
 
 FROM openjdk:21-jdk-slim
 EXPOSE 8080
