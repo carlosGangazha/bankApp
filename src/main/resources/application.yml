@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: jdbc:postgresql:bankapp
-    username: postgres
-    password: password
+    url: jdbc:postgresql://d0mq3um3jp1c738j04fg-a.oregon-postgres.render.com/miller_db
+    username: miller
+    password: T8CNq8v1szZKmZlGgyAyLseJ5OuJWmef
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
